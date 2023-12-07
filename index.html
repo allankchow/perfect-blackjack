@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Blackjack</title>
+
+    <!-- CSS stylesheets -->
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/normalize-fwd.css">
+    
+    <!-- JavaScripts -->
+    <script defer src="scripts/scripts.js"></script>
+</head>
+<body>
+    <header>
+        <!-- <h1>Blackjack</h1>
+
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+            </ul>
+        </nav> -->
+    </header>
+
+    <!----------------------------------------------------------------- 
+        Main
+    ---------------------------------------------------------------------->
+    <main>
+        
+        <!-- <img id="background-table" src="images/backgrounds/bg-1.webp" alt="Blackjack table background"> -->
+        <!-- <div class="background-image"></div> -->
+        <div class="score-container">
+            <p id="game-score">Score: 0</p>
+            <p id="win-percentage">0%</p>
+        </div>
+
+        <div class="playing-cards-container">
+            <!-- dealer cards -->
+            <h2>Dealer Cards</h2>
+            <div class="dealer-cards-container">
+                <p class="dealer-hand-value" id="dealer-hand-value">Dealer Hand: 0</p>
+                <img class="cards dealer-cards" id="dealer-card-1" src="images/playing-cards/card-back-02.svg" alt="dealer's first card">
+                <img class="cards dealer-cards" id="dealer-card-2" src="images/playing-cards/card-back-02.svg" alt="dealer's second card">  
+            </div>
+
+            <!-- player cards -->
+            <h2>Player Cards</h2>
+            <div class="player-cards-container">
+                <p class="player-hand-value" id="player-hand-value">Player Hand: 0</p>
+                <img class="cards player-cards" id="player-card-1" src="images/playing-cards/card-back-02.svg" alt="player's first card">
+                <img class="cards player-cards" id="player-card-2" src="images/playing-cards/card-back-02.svg" alt="player's second card">
+            </div>
+        </div>
+        <div class="player-buttons-container">
+            <button type="button" class="player-buttons" id="hit-button">Hit</button>
+            <button type="button" class="player-buttons" id="stand-button">Stand</button>
+            <button type="button" class="player-buttons" id="double-down-button">Double Down</button>
+            <button type="button" class="player-buttons" id="split-button">Split</button>
+            <button type="button" class="player-buttons" id="surrender-button">Surrender</button>
+        </div>
+        <div class="deal-button-container">
+            <button type="button" id="deal-button">Deal</button>
+        </div>
+
+        <div class="evaluation-text-container">
+            <!-- "correct"/"incorrect"/"blackjack!" -->
+            <h2 id="evaluation-heading">Welcome to Perfect Blackjack!</h2>
+            <!-- description of play -->
+            <p id="evaluation-detail">Where gamblers learn to stop gambling and start winning 💰💰💰</p>
+        </div>
+    </main>
+
+
+
+    <footer>
+
+    </footer>
+</body>
+</html>

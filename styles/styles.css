@@ -1,0 +1,205 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic (CALLED IN NORMALIZE.CSS)
+# Variables
+# Base
+    - Typography
+    - Elements
+    - Links
+# Layout
+# Components
+    - Mobile Menu
+	- Header
+	- Body
+	- Footer
+    - Desktop Mode
+--------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+# Variables
+--------------------------------------------------------------------------------*/
+:root {
+	--primary-font: "DejaVu Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+	--secondary-font: "Playfair Display", Georgia, Times, "Times New Roman", serif;
+	--primary-color: #111111;
+	--secondary-color: #eeeeee;
+
+}
+
+/* -----------------------------------------------------------------------------
+# Base
+--------------------------------------------------------------------------------*/
+body {
+	font-family: var(--primary-font);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--secondary-color);
+	background-color:var(--primary-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--secondary-font);
+	margin: .5em 0;
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+	color: var(--secondary-color);
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+p {
+	margin: 0 0 1.5em;
+    max-width: 41em ;
+}
+
+
+/* Elements
+--------------------------------------------- */
+header,
+footer {
+	padding: 1rem;
+	background-color: var(--primary-color);
+	text-align: center;
+}
+
+/* .background-image {
+	background-image: url('../images/backgrounds/bg-2.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+} */
+
+
+/* Links
+--------------------------------------------- */
+a,
+a:visited { 
+	color: #111111;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.5rem;
+}
+
+a:focus {
+	outline: 1px dotted;
+}
+
+
+/* -----------------------------------------------------------------------------
+# Layout
+--------------------------------------------------------------------------------*/
+
+/* -----------------------------------------------------------------------------
+# Component
+--------------------------------------------------------------------------------*/
+
+/* header */
+/* nav ul{
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	gap: 4rem;
+
+} */
+
+
+/* main */
+.score-container {
+	position: absolute;
+	right: 1rem;
+}
+
+/* .cards {
+	box-shadow: 8px 5px 5px rgb(0, 0, 0, 0.5);
+} */
+
+.dealer-cards {
+	max-width: 6rem;
+}
+
+.player-cards {
+	max-width: 9rem;
+}
+
+.playing-cards-container {
+	display: grid;
+	grid-template-columns:auto;
+	justify-content: center;
+	justify-items: center;
+}
+
+.player-buttons-container {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.deal-button-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+/* playing card animations */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-animation {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+/* evaluation text */
+.evaluation-text-container {
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	margin-top: 2rem;
+}
+
+.evaluation-text-container h2 {
+	grid-column: 2/3;
+	grid-row: 1/2;
+}
+
+.evaluation-text-container p {
+	grid-column: 2/3;
+	grid-row: 2/3;
+}
+
+
+.evaluation-text-container h2,
+.evaluation-text-container p {
+	margin: 0.4rem auto;
+}
+
+/* -- end of main */
+
+
+/* footer */
+
+
