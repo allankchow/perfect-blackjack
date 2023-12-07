@@ -182,11 +182,11 @@ class BlackjackGame {
     // method to find the recommended action based on perfect strategy table
     lookUpStrategyGuide(dealerHandValue, playerHandValue, isPlayerHandSoft, isPlayerHandPair) {
         let recommendedAction = '';
-        if(playerHandValue <= 8){             // If hand total 8 or lower, always hit
+        if(playerHandValue <= 8 && !isPlayerHandPair && !isPlayerHandSoft){             // If hand total 8 or lower, always hit
             recommendedAction = 'hit';          
-        } else if (playerHandValue >= 17){    // if hand total 17 or greater AND with no aces or pairs in player hand, always stand.
+        } else if (playerHandValue >= 17 && !isPlayerHandPair && !isPlayerHandSoft){    // if hand total 17 or greater AND with no aces or pairs in player hand, always stand.
             recommendedAction = 'stand';        
-        } else {                              // otherwise look up the recommended action from the table
+        } else {                                                                        // otherwise look up the recommended action from the table
             recommendedAction = perfectStrategy[playerHandValue][dealerHandValue]; 
         } return recommendedAction;
     }
@@ -290,7 +290,7 @@ class BlackjackGame {
 // The values are objects where each key is the dealer's up card (2 through A), and the value is the recommended action.
 const perfectStrategy = {
     // Hard totals
-    '8': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'hit', '6': 'hit', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
+    '8-': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'hit', '6': 'hit', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '9': {'2': 'hit', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '10': {'2': 'double down', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'double down', '8': 'double down', '9': 'double down', '10': 'hit', 'a': 'hit'},
     '11': {'2': 'double down', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'double down', '8': 'double down', '9': 'double down', '10': 'double down', 'a': 'double down'},
