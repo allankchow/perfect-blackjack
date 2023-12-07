@@ -1,0 +1,54 @@
+@use 'variables' as *;
+
+body {
+	font-family: $primary-font;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: $secondary-color;
+	background-color: $primary-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $secondary-font;
+	margin: .5em 0;
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+	color: $secondary-color;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+p {
+	margin: 0 0 1.5em;
+    max-width: 41em ;
+}
+
+a,
+a:visited { 
+	color: #111111;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.5rem;
+}
+
+a:focus {
+	outline: 1px dotted;
+}
+
+

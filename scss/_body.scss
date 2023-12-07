@@ -1,0 +1,69 @@
+
+main {
+    .score-container {
+        position: absolute;
+        right: 1rem;
+    }
+
+    .playing-cards-container {
+        display: grid;
+        grid-template-columns:auto;
+        justify-content: center;
+        justify-items: center;
+
+        .dealer-cards-container{
+            .dealer-cards {
+                max-width: 6rem;
+                }
+        }
+
+        .player-cards-container {
+            .player-cards {
+                max-width: 9rem;
+            }
+        }
+    }
+
+    .player-buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .deal-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .evaluation-text-container {
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        margin-top: 2rem;
+
+        h2 {
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+
+        p {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+        h2, p {
+            margin: 0.4rem auto;
+        }
+
+    }
+
+    /* strategy table */
+    .strategy-table-hidden {
+        display: none;
+    }
+
+    .strategy-table-shown {
+        display: block;
+    }
+}
