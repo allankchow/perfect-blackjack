@@ -369,14 +369,32 @@ function gameStart() {
     blackjackGame = new BlackjackGame();
 }
 
+
+
+
+// background music function
+function playBGMusic() {
+    const bgMusic = document.getElementById('backgroundMusic');
+    bgMusic.volume = 0.5; // Set initial volume
+    bgMusic.play(); // Start playing music
+
+    // Volume control
+    document.getElementById('volumeControl').addEventListener('input', (event) => {
+        bgMusic.volume = event.target.value;
+    });
+}
+
+
 // ------------------------------------------------------------------------------------------------------
 // Event Listener function
 // ------------------------------------------------------------------------------------------------------
 
 // temporary game starter condition
 document.addEventListener('DOMContentLoaded', () => {
+    playBGMusic();
     gameStart();
     blackjackGame.updateUIDeal();
+    
     
 });
 
