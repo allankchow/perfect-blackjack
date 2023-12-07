@@ -391,7 +391,7 @@ function playBGMusic() {
 
 // temporary game starter condition
 document.addEventListener('DOMContentLoaded', () => {
-    playBGMusic();
+    // playBGMusic();
     gameStart();
     blackjackGame.updateUIDeal();
     
