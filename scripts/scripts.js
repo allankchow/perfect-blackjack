@@ -1,17 +1,16 @@
 'use strict';
 
-
 // Deck class
 // create, shuffle, combine decks
 class Deck {
     constructor(numberOfDecks = 4) {
         this.numberOfDecks = numberOfDecks;
-        this.cards = this.createMultipleDecks(); // array of card objects
+        this.cards = this._createMultipleDecks(); // array of card objects
         this.shuffle(); //shuffle at start
     }
 
     // create a single deck
-    createDeck() {
+    _createDeck() {
         const suits = ['diamond', 'clover', 'heart', 'spade'];
         const ranks = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k']
         let deck = [];
@@ -26,11 +25,11 @@ class Deck {
     }
 
     // create a deck of decks!
-    createMultipleDecks() {
+    _createMultipleDecks() {
         // stack decks together
         let decks = [];
         for (let i = 0; i < this.numberOfDecks; i++) {
-            decks = decks.concat(this.createDeck());
+            decks = decks.concat(this._createDeck());
         }
         return decks;
     }
@@ -57,7 +56,7 @@ class BlackjackGame {
         this.dealerHandHidden = [];
         this.score = 0;
         this.handsPlayed = 0;
-        this._disableButtons();
+        this.disableButtons();
     }
 
     // 1. Game Flow Methods                           
@@ -72,7 +71,7 @@ class BlackjackGame {
 
 
     // deal 2 revealed cards to player and 1 to dealer
-    dealInitialCards() {
+    _dealInitialCards() {
         this._dealCard(this.playerHand);
         this._dealCard(this.playerHand);
         this._dealCard(this.dealerHand);
@@ -81,18 +80,24 @@ class BlackjackGame {
 
     // create new instance of deck and hand
     newRound() {
+        // resets
         this.deck = new Deck(); //create new deck each deal... can change later so ev counting is possible
         this.deck.shuffle();
         this.playerHand = [];
         this.dealerHand = [];
         this.dealerHandHidden = [];
-        this.dealInitialCards();
         gameHTMLElements.evalutionText.header.textContent = "";
         gameHTMLElements.evalutionText.detail.textContent = "";
+
+        // initial game actions
+        this._dealInitialCards();
+        this.enableButtons();
+        this.checkForBJ();
+        this.updateUIDeal();
     }
 
     // counts player or dealer's hand value
-    countHandValue(hand) {
+    _countHandValue(hand) {
         let handValue = 0;
         // loops through each card and adds the card values to a variable
         hand.forEach((card) => {
@@ -116,19 +121,19 @@ class BlackjackGame {
     }
 
     // check if hand has aces basically (this game only involves the initial deal so this is enough)
-    isHandSoft(hand) {
+    _isHandSoft(hand) {
         // Check if one of the two cards is an Ace
         return hand.some(card => card[0] === "a"); //checks if at least one element in the array satisfies the provided condition.
     }
 
     // checks for pair between first two cards
-    checkForPairs(hand) {
+    _checkForPlayerPairs() {
         let isPair = false;
         let playerCard1 = this.playerHand[0][0];
         let playerCard2 = this.playerHand[1][0];
-        let playerHandValue = this.countHandValue(this.playerHand);
+        let playerHandValue = this._countHandValue(this.playerHand);
         // let playerHandAceCount = this.countAces(this.playerHand);
-        let isPlayerHandSoft = this.isHandSoft(this.playerHand);
+        let isPlayerHandSoft = this._isHandSoft(this.playerHand);
 
         if (playerCard1 === playerCard2) { //checks for regular pairs
             isPair = true;
@@ -137,26 +142,26 @@ class BlackjackGame {
         } return isPair;
     }
 
-    calcPercentage(wins, totalHands) {
+    _calcPercentage(wins, totalHands) {
         if (totalHands === 0) {
             return 0;
         } return Math.round((wins / totalHands) * 100);
     }
 
-    updateGameScore(isActionCorrect) {
+    _updateGameScore(isActionCorrect) {
         this.handsPlayed ++;
         if (isActionCorrect) {
             this.score ++;
         }
         // update game score in html.... move this late to updateUIAfterDecision
         gameHTMLElements.stats.gameScore.textContent = `Score: ${this.score}/${this.handsPlayed}`;
-        gameHTMLElements.stats.winPercentage.textContent = `${this.calcPercentage(this.score,this.handsPlayed)}%`;
+        gameHTMLElements.stats.winPercentage.textContent = `${this._calcPercentage(this.score,this.handsPlayed)}%`;
     }
 
     // formats the counted player hand to work with lookup table
-    formatPlayerHandValue(playerHandValue) {
-        const isPlayerHandSoft = this.isHandSoft(this.playerHand); //true means there's atleast 1 ace
-        const isPlayerHandPair = this.checkForPairs(this.playerHand); //true means it's a pair
+    _formatPlayerHandValue(playerHandValue) {
+        const isPlayerHandSoft = this._isHandSoft(this.playerHand); //true means there's atleast 1 ace
+        const isPlayerHandPair = this._checkForPlayerPairs(); //true means it's a pair
 
         if (isPlayerHandPair && isPlayerHandSoft) {                         // set playerHandValue to string 'a,a' if pair of aces
             playerHandValue = 'a,a';
@@ -168,7 +173,7 @@ class BlackjackGame {
     }
 
     // formats the counted dealer hand to work with lookup table
-    formatDealerHandValue(dealerHandValue) {
+    _formatDealerHandValue(dealerHandValue) {
         if (dealerHandValue === 11) {  // set dealerHandValue to string 'a' if ace
             dealerHandValue = 'a';
         } return dealerHandValue;
@@ -176,7 +181,7 @@ class BlackjackGame {
 
     // format cards BEFORE looking up strategy
     // method to find the recommended action based on perfect strategy table
-    lookUpStrategyGuide(dealerHandValue, playerHandValue, isPlayerHandSoft, isPlayerHandPair) {
+    _lookUpStrategyGuide(dealerHandValue, playerHandValue, isPlayerHandSoft, isPlayerHandPair) {
         let recommendedAction = '';
         if(playerHandValue <= 8 && !isPlayerHandPair && !isPlayerHandSoft){             // If hand total 8 or lower, always hit
             recommendedAction = 'hit';          
@@ -188,20 +193,20 @@ class BlackjackGame {
     }
 
     evaluatePlayerDecision(playerAction) {
-        let dealerHandValue = this.countHandValue(this.dealerHand);
-        let playerHandValue = this.countHandValue(this.playerHand);
-        const isPlayerHandSoft = this.isHandSoft(this.playerHand); 
-        const isPlayerHandPair = this.checkForPairs(this.playerHand);
+        let dealerHandValue = this._countHandValue(this.dealerHand);
+        let playerHandValue = this._countHandValue(this.playerHand);
+        const isPlayerHandSoft = this._isHandSoft(this.playerHand); 
+        const isPlayerHandPair = this._checkForPlayerPairs(this.playerHand);
         // let recommendedAction = '';
 
-        playerHandValue = this.formatPlayerHandValue(playerHandValue); // returns playerHandValue in lookup-table-ready format
-        dealerHandValue = this.formatDealerHandValue(dealerHandValue); // returns dealerHandValue in lookup-table-ready format
+        playerHandValue = this._formatPlayerHandValue(playerHandValue); // returns playerHandValue in lookup-table-ready format
+        dealerHandValue = this._formatDealerHandValue(dealerHandValue); // returns dealerHandValue in lookup-table-ready format
 
-        const recommendedAction = this.lookUpStrategyGuide(dealerHandValue, playerHandValue, isPlayerHandSoft, isPlayerHandPair); // get recommended action from lookup table
+        const recommendedAction = this._lookUpStrategyGuide(dealerHandValue, playerHandValue, isPlayerHandSoft, isPlayerHandPair); // get recommended action from lookup table
 
         // evaluates user action
         const isActionCorrect = playerAction === recommendedAction;
-        this.updateGameScore(isActionCorrect);
+        this._updateGameScore(isActionCorrect);
         if (isActionCorrect) {
             gameHTMLElements.evalutionText.header.textContent = "Correct!";
             gameHTMLElements.evalutionText.detail.textContent = `You always want to ${recommendedAction} in this situation`
@@ -214,7 +219,7 @@ class BlackjackGame {
     }
 
 
-    _disableButtons() {
+    disableButtons() {
         // disable buttons
         gameHTMLElements.button.hitButton.disabled = true;
         gameHTMLElements.button.standButton.disabled = true;
@@ -225,13 +230,13 @@ class BlackjackGame {
         gameHTMLElements.button.deal.disabled = false;
     }
 
-    _enableButtons() {
+    enableButtons() {
         // enable buttons
         gameHTMLElements.button.hitButton.disabled = false;
         gameHTMLElements.button.standButton.disabled = false;
         gameHTMLElements.button.doubleDownButton.disabled = false;
         // enable split button only if player has pairs
-        if (this.checkForPairs(this.playerHand)) {
+        if (this._checkForPlayerPairs(this.playerHand)) {
             gameHTMLElements.button.splitButton.disabled = false;
         }
         gameHTMLElements.button.surrenderButton.disabled = false;
@@ -241,25 +246,25 @@ class BlackjackGame {
 
     // checks for blackjack and ends round
     checkForBJ() {
-        let playerHandValue = this.countHandValue(this.playerHand);
-        let dealerHandValue = this.countHandValue(this.dealerHand);
-        let dealerHandHiddenValue = this.countHandValue(this.dealerHandHidden);
+        let playerHandValue = this._countHandValue(this.playerHand);
+        let dealerHandValue = this._countHandValue(this.dealerHand);
+        let dealerHandHiddenValue = this._countHandValue(this.dealerHandHidden);
         
         if (playerHandValue === 21 && (dealerHandValue + dealerHandHiddenValue) === 21) { //check if both dealer and player has blackjack -->push
             console.log("Push");
             gameHTMLElements.evalutionText.header.textContent = "Push";
-            this._disableButtons();
+            this.disableButtons();
             gameHTMLElements.button.deal.disabled = false;
         } else if (playerHandValue === 21) {                                   //check for player blackjack
             console.log("BJ TIME");
             gameHTMLElements.evalutionText.header.textContent = "BLACKJACK!";
-            this._disableButtons();
+            this.disableButtons();
             gameHTMLElements.button.deal.disabled = false;
         } else if ((dealerHandValue + dealerHandHiddenValue) === 21) {      //check for early dealer bj
             this.dealerHand[1] = this.dealerHandHidden[0];                  // add the hidden card to the second official dealer card before the ui update method
             console.log("DEALER BJ!!!");
             gameHTMLElements.evalutionText.header.textContent = "Dealer Blackjack.";
-            this._disableButtons();
+            this.disableButtons();
             gameHTMLElements.button.deal.disabled = false;
         }
         console.log(`dealer hand value = ${dealerHandValue + dealerHandHiddenValue}`);
@@ -288,8 +293,8 @@ class BlackjackGame {
         })
 
         // update hand values (text)
-        gameHTMLElements.player.handValue.innerHTML = `Player Hand: ${this.countHandValue(this.playerHand)}`;
-        gameHTMLElements.dealer.handValue.innerHTML = `Dealer Hand: ${this.countHandValue(this.dealerHand)}`;
+        gameHTMLElements.player.handValue.innerHTML = `Player Hand: ${this._countHandValue(this.playerHand)}`;
+        gameHTMLElements.dealer.handValue.innerHTML = `Dealer Hand: ${this._countHandValue(this.dealerHand)}`;
     }
 }
 
@@ -396,6 +401,7 @@ function playBGMusic() {
 }
 
 
+
 // ------------------------------------------------------------------------------------------------------
 // Event Listener function
 // ------------------------------------------------------------------------------------------------------
@@ -405,39 +411,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // playBGMusic();
     gameStart();
     blackjackGame.updateUIDeal();
-    
-    
 });
 
 // event listeners for player buttons
 gameHTMLElements.button.hitButton.addEventListener('click', () => {
     playerAction = "hit";
-    blackjackGame._disableButtons();
+    blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
 gameHTMLElements.button.standButton.addEventListener('click', () => {
     playerAction = "stand";
-    blackjackGame._disableButtons();
+    blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
 gameHTMLElements.button.doubleDownButton.addEventListener('click', () => {
     playerAction = "double down";
-    blackjackGame._disableButtons();
+    blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
 gameHTMLElements.button.splitButton.addEventListener('click', () => {
     playerAction = "split";
-    blackjackGame._disableButtons();
+    blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
 gameHTMLElements.button.surrenderButton.addEventListener('click', () => {
     playerAction = "surrender";
-    blackjackGame._disableButtons();
+    blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
 gameHTMLElements.button.deal.addEventListener('click', () => {
     blackjackGame.newRound(); //bj checker in here
-    blackjackGame._enableButtons();
-    blackjackGame.checkForBJ();
-    blackjackGame.updateUIDeal();
 });
