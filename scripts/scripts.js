@@ -76,6 +76,7 @@ class BlackjackGame {
         this._dealCard(this.playerHand);
         this._dealCard(this.dealerHand);
         this._dealCard(this.dealerHandHidden);
+        console.log(`Cards left in the deck: ${this.deck.cards.length}`);
     }
 
     // create new instance of deck and hand
@@ -330,7 +331,6 @@ const perfectStrategy = {
     'a,9': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'stand', '8': 'stand', '9': 'stand', '10': 'stand', 'a': 'stand'},
 
     // Pairs
-    'a,a': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'split', '9': 'split', '10': 'split', 'a': 'split'},
     '2,2': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '3,3': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '4,4': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'split', '6': 'split', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
@@ -340,6 +340,7 @@ const perfectStrategy = {
     '8,8': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'split', '9': 'split', '10': 'stand', 'a': 'split'},
     '9,9': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'stand', '8': 'split', '9': 'split', '10': 'stand', 'a': 'stand'},
     '10,10': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'stand', '8': 'stand', '9': 'stand', '10': 'stand', 'a': 'stand'},
+    'a,a': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'split', '9': 'split', '10': 'split', 'a': 'split'},
 
 };
 
@@ -391,7 +392,7 @@ function gameStart() {
 // background music function
 function playBGMusic() {
     const bgMusic = document.getElementById('backgroundMusic');
-    bgMusic.volume = 0.5; // Set initial volume
+    bgMusic.volume = 0.3; // Set initial volume
     bgMusic.play(); // Start playing music
 
     // Volume control
@@ -408,7 +409,7 @@ function playBGMusic() {
 
 // temporary game starter condition
 document.addEventListener('DOMContentLoaded', () => {
-    // playBGMusic();
+    playBGMusic();
     gameStart();
     blackjackGame.updateUIDeal();
 });
