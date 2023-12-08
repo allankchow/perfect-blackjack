@@ -54,45 +54,41 @@ class BlackjackGame {
         this.deck.shuffle(); 
         this.playerHand = [];
         this.dealerHand = [];
+        this.dealerHandHidden = [];
         this.score = 0;
         this.handsPlayed = 0;
         this._disableButtons();
     }
 
     // 1. Game Flow Methods                           
-    
-    // deal revealed card to player
-    _dealCardPlayer() {
+
+    // general dealing card method
+    _dealCard(hand) {
         if (this.deck.cards.length > 0) {
-            // push card at top of deck into player hand and delete from deck
-            this.playerHand.push(this.deck.cards.pop());
+            //  push card at top of deck into hand and delete from deck
+            hand.push(this.deck.cards.pop());
         }
     }
 
-    // deal revealed card to dealer
-    _dealCardDealer() {
-        if (this.deck.cards.length > 0) {
-            //  push card at top of deck into dealer hand and delete from deck
-            this.dealerHand.push(this.deck.cards.pop());
-        }
-    }
 
     // deal 2 revealed cards to player and 1 to dealer
     dealInitialCards() {
-        this._dealCardPlayer();
-        this._dealCardPlayer();
-        this._dealCardDealer();
+        this._dealCard(this.playerHand);
+        this._dealCard(this.playerHand);
+        this._dealCard(this.dealerHand);
+        this._dealCard(this.dealerHandHidden);
     }
 
     // create new instance of deck and hand
-    dealCards() {
+    newRound() {
         this.deck = new Deck(); //create new deck each deal... can change later so ev counting is possible
         this.deck.shuffle();
         this.playerHand = [];
         this.dealerHand = [];
+        this.dealerHandHidden = [];
         this.dealInitialCards();
-        gameHTMLElements.evalutionText.evaluationTextHeader.textContent = "";
-        gameHTMLElements.evalutionText.evaluationTextDetail.textContent = "";
+        gameHTMLElements.evalutionText.header.textContent = "";
+        gameHTMLElements.evalutionText.detail.textContent = "";
     }
 
     // counts player or dealer's hand value
@@ -207,11 +203,11 @@ class BlackjackGame {
         const isActionCorrect = playerAction === recommendedAction;
         this.updateGameScore(isActionCorrect);
         if (isActionCorrect) {
-            gameHTMLElements.evalutionText.evaluationTextHeader.textContent = "Correct!";
-            gameHTMLElements.evalutionText.evaluationTextDetail.textContent = `You always want to ${recommendedAction} in this situation`
+            gameHTMLElements.evalutionText.header.textContent = "Correct!";
+            gameHTMLElements.evalutionText.detail.textContent = `You always want to ${recommendedAction} in this situation`
         } else {
-            gameHTMLElements.evalutionText.evaluationTextHeader.textContent = "Incorrect.";
-            gameHTMLElements.evalutionText.evaluationTextDetail.textContent = `The correct action was to ${recommendedAction}.`
+            gameHTMLElements.evalutionText.header.textContent = "Incorrect.";
+            gameHTMLElements.evalutionText.detail.textContent = `The correct action was to ${recommendedAction}.`
         }
         
         console.log(`Recommended Action: ${recommendedAction}, Is Player Hand Soft?: ${isPlayerHandSoft}, Player Hand: ${playerHandValue}, Dealer Card: ${dealerHandValue}, Player Pair?: ${isPlayerHandPair}`);
@@ -226,7 +222,7 @@ class BlackjackGame {
         gameHTMLElements.button.splitButton.disabled = true;
         gameHTMLElements.button.surrenderButton.disabled = true;
         // re-enable deal button
-        gameHTMLElements.newHand.deal.disabled = false;
+        gameHTMLElements.button.deal.disabled = false;
     }
 
     _enableButtons() {
@@ -240,18 +236,35 @@ class BlackjackGame {
         }
         gameHTMLElements.button.surrenderButton.disabled = false;
         // disable deal button
-        gameHTMLElements.newHand.deal.disabled = true;
+        gameHTMLElements.button.deal.disabled = true;
     }
 
+    // checks for blackjack and ends round
     checkForBJ() {
         let playerHandValue = this.countHandValue(this.playerHand);
-        if (playerHandValue === 21) {
-            console.log("BJ TIME");
-            gameHTMLElements.evalutionText.evaluationTextHeader.textContent = "BLACKJACK!";
+        let dealerHandValue = this.countHandValue(this.dealerHand);
+        let dealerHandHiddenValue = this.countHandValue(this.dealerHandHidden);
+        
+        if (playerHandValue === 21 && (dealerHandValue + dealerHandHiddenValue) === 21) { //check if both dealer and player has blackjack -->push
+            console.log("Push");
+            gameHTMLElements.evalutionText.header.textContent = "Push";
             this._disableButtons();
-            gameHTMLElements.newHand.deal.disabled = false;
+            gameHTMLElements.button.deal.disabled = false;
+        } else if (playerHandValue === 21) {                                   //check for player blackjack
+            console.log("BJ TIME");
+            gameHTMLElements.evalutionText.header.textContent = "BLACKJACK!";
+            this._disableButtons();
+            gameHTMLElements.button.deal.disabled = false;
+        } else if ((dealerHandValue + dealerHandHiddenValue) === 21) {      //check for early dealer bj
+            this.dealerHand[1] = this.dealerHandHidden[0];                  // add the hidden card to the second official dealer card before the ui update method
+            console.log("DEALER BJ!!!");
+            gameHTMLElements.evalutionText.header.textContent = "Dealer Blackjack.";
+            this._disableButtons();
+            gameHTMLElements.button.deal.disabled = false;
         }
+        console.log(`dealer hand value = ${dealerHandValue + dealerHandHiddenValue}`);
     }
+
 
     // call method to update game UI
     updateUIDeal() {
@@ -262,16 +275,16 @@ class BlackjackGame {
             // update the cards in html to reflect the cards dealt to player
             let currentPlayerCard = document.getElementById(`player-card-${index + 1}`);
             currentPlayerCard.src = `images/playing-cards/${suit}-${rank}.svg`;
-            //add animation class on card hand out
-            currentPlayerCard.classList.add('card-animation'); 
         });
+
+        // reset the second dealer card to be face down
+        document.getElementById(`dealer-card-2`).src = 'images/playing-cards/card-back-02.svg';
 
         // update dealer card hand images
         this.dealerHand.forEach((card, index) => {
             let [rank,suit] = card;
             let currentDealerCard = document.getElementById(`dealer-card-${index + 1}`);
             currentDealerCard.src = `images/playing-cards/${suit}-${rank}.svg`;
-            currentDealerCard.classList.add('card-animation');
         })
 
         // update hand values (text)
@@ -336,6 +349,7 @@ const gameHTMLElements = {
         doubleDownButton: document.getElementById('double-down-button'),
         splitButton: document.getElementById('split-button'),
         surrenderButton: document.getElementById('surrender-button'),
+        deal: document.getElementById('deal-button'),
     },
     dealer: {
         handValue: document.getElementById('dealer-hand-value'),
@@ -347,12 +361,12 @@ const gameHTMLElements = {
         playerCard1: document.getElementById('player-card-1'),
         playerCard2: document.getElementById('player-card-2'),
     },
-    newHand: {
-        deal: document.getElementById('deal-button'),
-    },
     evalutionText: {
-        evaluationTextHeader: document.getElementById('evaluation-heading'),
-        evaluationTextDetail: document.getElementById('evaluation-detail'),
+        header: document.getElementById('evaluation-heading'),
+        detail: document.getElementById('evaluation-detail'),
+    },
+    strategyTable: {
+        strategyTableButton: document.getElementById('strategy-button-container'),
     },
 };
 
@@ -368,9 +382,6 @@ let blackjackGame;
 function gameStart() {
     blackjackGame = new BlackjackGame();
 }
-
-
-
 
 // background music function
 function playBGMusic() {
@@ -424,8 +435,8 @@ gameHTMLElements.button.surrenderButton.addEventListener('click', () => {
     blackjackGame._disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
-gameHTMLElements.newHand.deal.addEventListener('click', () => {
-    blackjackGame.dealCards(); //bj checker in here
+gameHTMLElements.button.deal.addEventListener('click', () => {
+    blackjackGame.newRound(); //bj checker in here
     blackjackGame._enableButtons();
     blackjackGame.checkForBJ();
     blackjackGame.updateUIDeal();

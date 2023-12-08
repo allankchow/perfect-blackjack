@@ -437,10 +437,13 @@ main .evaluation-text-container p {
 main .evaluation-text-container h2, main .evaluation-text-container p {
   margin: 0.4rem auto;
 }
-main .strategy-table-hidden {
+main .strategy-button-container {
   display: none;
 }
-main .strategy-table-shown {
+main .strategy-table-container-hidden {
+  display: none;
+}
+main .strategy-table-container-shown {
   display: block;
 }
 

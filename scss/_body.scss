@@ -58,12 +58,16 @@ main {
 
     }
 
-    /* strategy table */
-    .strategy-table-hidden {
+    .strategy-button-container {
         display: none;
     }
 
-    .strategy-table-shown {
+    /* strategy table */
+    .strategy-table-container-hidden {
+        display: none;
+    }
+
+    .strategy-table-container-shown {
         display: block;
     }
 }
