@@ -1,0 +1,17 @@
+@use 'variables' as *;
+@use 'sass:math';
+
+// Function to convert px to em
+// em() takes two arguments: pixel value and browser context with defaul value- 16px
+// math.div is a method of built in module sass:math
+@function em($px, $bc: 16) {
+    @return #{math.div($px,$bc)}em;
+
+}
+
+// Media query mixin
+@mixin mq($w) {
+    @media (min-width: $w) {
+        @content; //content directive
+    }
+}

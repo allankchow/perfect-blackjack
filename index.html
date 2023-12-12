@@ -29,9 +29,10 @@
         Main
     ---------------------------------------------------------------------->
     <main>
-        <div>
+        <!-- music control container -->
+        <div class="music-container">
             <audio id="backgroundMusic" loop>
-                <source src="sounds/bg-music-02.mp3" type="audio/mpeg">
+                <source src="sounds/bg-music-03.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             
@@ -42,55 +43,149 @@
             </div>
         </div>
 
-        <!-- <img id="background-table" src="images/backgrounds/bg-1.webp" alt="Blackjack table background"> -->
-        <!-- <div class="background-image"></div> -->
-        <div class="score-container">
-            <p id="game-score">Score: 0</p>
-            <p id="win-percentage">0%</p>
+        <!-- return to menu button -->
+        <div id="return-to-menu-button-container">
+            <button type="button" class="strategy-buttons" id="to-menu-from-strategy-button">Return To Menu</button>
         </div>
 
-        <div class="playing-cards-container">
-            <!-- dealer cards -->
-            <h2>Dealer Cards</h2>
-            <div class="dealer-cards-container">
-                <p class="dealer-hand-value" id="dealer-hand-value">Dealer Hand: 0</p>
-                <img class="cards dealer-cards" id="dealer-card-1" src="images/playing-cards/card-back-02.svg" alt="dealer's first card">
-                <img class="cards dealer-cards" id="dealer-card-2" src="images/playing-cards/card-back-02.svg" alt="dealer's second card">  
+        <!-- START OF MAIN MENU HTML -->
+        <div id="main-menu-screen-container">
+            <div class="main-menu-text-container">
+                <h1>Welcome to Perfect Blackjack!</h1>
+                <p>Where gamblers learn to stop gambling and start winning 💰💰💰</p>
             </div>
 
-            <!-- player cards -->
-            <h2>Player Cards</h2>
-            <div class="player-cards-container">
-                <p class="player-hand-value" id="player-hand-value">Player Hand: 0</p>
-                <img class="cards player-cards" id="player-card-1" src="images/playing-cards/card-back-02.svg" alt="player's first card">
-                <img class="cards player-cards" id="player-card-2" src="images/playing-cards/card-back-02.svg" alt="player's second card">
+            <div class="main-menu-buttons-container">
+                <button type="button" class="main-menu-buttons" id="new-game-button">New Game</button>
+                <button type="button" class="main-menu-buttons" id="instructions-button">How to Play</button>
+                <button type="button" class="main-menu-buttons" id="strategy-guide-button">Strategy Guide</button>
+                <button type="button" class="main-menu-buttons" id="credits-button">Credits</button>
             </div>
+
+
         </div>
 
-        <div class="player-buttons-container">
-            <button type="button" class="player-buttons" id="hit-button">Hit</button>
-            <button type="button" class="player-buttons" id="stand-button">Stand</button>
-            <button type="button" class="player-buttons" id="double-down-button">Double Down</button>
-            <button type="button" class="player-buttons" id="split-button">Split</button>
-            <button type="button" class="player-buttons" id="surrender-button">Surrender</button>
-        </div>
-        <div class="deal-button-container">
-            <button type="button" id="deal-button">Deal</button>
+
+        <!-- START OF INSTRUCTION MENU HTML -->
+        <div id="instructions-screen-container">
+            <section>
+                <h2>How to Play</h2>
+                <p><strong>Welcome to the Perfect Blackjack Strategy Trainer!</strong> This interactive tool is designed to help you learn and practice the most effective strategies in Blackjack, improving your skills and understanding of the game. Here’s how to get started:</p>
+                <ol>
+                    <li><strong>Objective:</strong> Improve your Blackjack decision-making skills. The goal is not just to beat the dealer, but to make the statistically best decision for each hand.</li>
+                    <li><strong>Card Values:</strong> Cards 2-10 are valued at their face value. Face cards (Jack, Queen, King) are worth 10, and Aces can be 1 or 11.</li>
+                    <li><strong>Starting the Game:</strong> You are dealt two cards. The dealer receives one face-up card.</li>
+                    <li><strong>Your Decisions:</strong>
+                        <ul>
+                            <li><strong>Hit:</strong> Draw another card.</li>
+                            <li><strong>Stand:</strong> Keep your current hand.</li>
+                            <li><strong>Double Down:</strong> Double your bet for one additional card.</li>
+                            <li><strong>Split:</strong> If you have two cards of the same value, split them into two hands.</li>
+                            <li><strong>Surrender:</strong> Give up the hand and lose half your bet.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Scoring:</strong> Your decisions will be scored based on their correctness according to the strategy table. The table provides the optimal action for every card combination.</li>
+                </ol>
+                <p>This trainer is designed to enhance your understanding of Blackjack strategy by providing real-time feedback and scoring based on optimal decisions. It's a valuable tool for both beginners and experienced players looking to refine their skills.</p>
+            </section>
         </div>
 
-        <div class="evaluation-text-container">
-            <!-- "correct"/"incorrect"/"blackjack!" -->
-            <h2 id="evaluation-heading">Welcome to Perfect Blackjack!</h2>
-            <!-- description of play -->
-            <p id="evaluation-detail">Where gamblers learn to stop gambling and start winning 💰💰💰</p>
+
+        <!-- START OF STRATEGY MENU HTML -->
+        <div id="strategy-screen-container">
+
+            <div class="strategy-screen-content-container">
+                <section>
+                    <h2>Strategy Guide Info</h2>
+                    <p>This Blackjack strategy trainer is an interactive tool built with HTML, CSS, and JavaScript, designed to help players practice and master basic Blackjack strategy under typical casino rules:</p>
+                    <ul>
+                        <li>Dealer Stands on soft 17</li>
+                        <li>Doubling down after splits is allowed</li>
+                        <li>Late surrender option is available</li>
+                        <li>Game is played with 4-8 decks</li>
+                    </ul>
+                    <p><strong>Follow the strategy table in order to achieve perfect strategy!</strong></p>
+                    <p>Assuming the Blackjack payout is 3:2, with these rules and perfect basic strategy adherence, the estimated house edge typically ranges from around 0.4% to 0.6%. This implies an expected return to the player of about 99.4% to 99.6%.</p>
+                    <p>To further enhance your edge, look into Expected Value (EV) counting. EV counting, a nuanced form of card counting, helps in making more informed decisions by quantifying the profitability of playing hands based on the composition of the remaining cards in the deck(s). Adjusting bets and strategies according to the EV (positive for favorable cards, negative for unfavorable ones) can potentially tilt the odds in the player's favor, further reducing the house edge when applied with skill.</p>
+                </section>
+                <section>
+                    <h2>Perfect Strategy Table</h2>
+                    <div class="strategy-table-container strategy-table-container-hidden" id="strategy-table-container">
+                        <img id="strategy-table-img" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
+                    </div>
+                </section>
+            </div>
+           
         </div>
-        <div class="strategy-button-container">
-            <button type="button" id="strategy-button">Show Strategy Table</button>
-        </div>
-        <div class="strategy-table-container strategy-table-container-hidden" id="strategy-table">
+
+        <!-- START OF CREDITS MENU HTML -->
+        <div id="credits-screen-container">
+            <h2>Credits</h2>
             <table>
-                <!-- Table content will be populated by JavaScript -->
+             <tr>
+                <th>Asset</th>
+                <th>Source</th>
+             </tr>
+             <tr>
+                <td>Background Music</td>
+                <td><a href="https://pixabay.com/users/healthydesires-29028663/">Water Focused</a></td>
+             </tr>
             </table>
+        </div>
+
+
+
+
+        <!-- START OF MAIN GAME HTML -->
+        <div id="main-game-screen-container">
+
+            <div class="score-container">
+                <p id="game-score">Score: 0</p>
+                <p id="win-percentage">0%</p>
+            </div>
+
+            <div class="playing-cards-container">
+                <!-- dealer cards -->
+                <!-- <h2>Dealer Cards</h2> -->
+                <div class="dealer-cards-container">
+                    <p class="dealer-hand-value" id="dealer-hand-value">Dealer Hand: 0</p>
+                    <img class="cards dealer-cards" id="dealer-card-1" src="images/playing-cards/card-back-02.svg" alt="dealer's first card">
+                    <img class="cards dealer-cards" id="dealer-card-2" src="images/playing-cards/card-back-02.svg" alt="dealer's second card">  
+                </div>
+
+                <!-- player cards -->
+                <!-- <h2>Player Cards</h2> -->
+                <div class="player-cards-container">
+                    <p class="player-hand-value" id="player-hand-value">Player Hand: 0</p>
+                    <img class="cards player-cards" id="player-card-1" src="images/playing-cards/card-back-02.svg" alt="player's first card">
+                    <img class="cards player-cards" id="player-card-2" src="images/playing-cards/card-back-02.svg" alt="player's second card">
+                </div>
+            </div>
+
+            <div class="player-buttons-container">
+                <button type="button" class="player-buttons" id="hit-button">Hit</button>
+                <button type="button" class="player-buttons" id="stand-button">Stand</button>
+                <button type="button" class="player-buttons" id="double-down-button">Double Down</button>
+                <button type="button" class="player-buttons" id="split-button">Split</button>
+                <button type="button" class="player-buttons" id="surrender-button">Surrender</button>
+            </div>
+            <div class="deal-button-container">
+                <button type="button" id="deal-button">Deal</button>
+            </div>
+
+            <div class="evaluation-text-container">
+                <!-- "correct"/"incorrect"/"blackjack!" -->
+                <h2 id="evaluation-heading"></h2>
+                <!-- description of play -->
+                <p id="evaluation-detail"></p>
+            </div>
+
+            <div class="strategy-button-container" id="strategy-button-container">
+                <button type="button" id="strategy-button-02">Show Strategy Table</button>
+            </div>
+            <div class="strategy-table-container" id="strategy-table-container">
+                <img id="strategy-table-img" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
+            </div>
         </div>
     </main>
 

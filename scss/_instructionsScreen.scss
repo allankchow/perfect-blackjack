@@ -1,0 +1,14 @@
+#instructions-screen-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    section{
+        display: flex;
+        flex-direction: column;
+        margin: 6rem 1rem;
+        max-width: 40rem;
+        align-items: center;
+        
+    }
+} 

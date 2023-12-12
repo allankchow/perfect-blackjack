@@ -1,0 +1,24 @@
+@use 'mixins' as *;
+
+#strategy-screen-container {
+    display: none;
+
+    .strategy-screen-content-container {
+        margin: 6rem 1rem;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
+        h2 {
+            text-align: center;
+        }
+
+        .strategy-table-container {
+            max-width: 36em;
+        }
+
+    }
+
+
+}

@@ -1,0 +1,124 @@
+@use 'mixins' as *;
+
+#main-game-screen-container {
+    display: none;
+    background-image: url(../images/backgrounds/bg-3.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    min-width: 43.75rem;
+    max-width: 42rem;
+    margin: 0 auto;
+
+    #game-score {
+        position: absolute;
+        right: 10px;
+        top: 10px
+    }
+
+    #win-percentage {
+        position: absolute;
+        right: 10px;
+        top: 40px;
+    }
+
+    .playing-cards-container {
+        display: grid;
+        grid-template-columns:auto;
+        justify-content: center;
+        justify-items: center;
+        gap: 11rem;
+
+
+        .dealer-cards-container{
+            margin-top: 3rem;
+            .dealer-cards {
+                max-width: 6rem;
+                }
+        }
+
+        .player-cards-container {
+            .player-cards {
+                max-width: 8rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .player-buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .deal-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .evaluation-text-container {
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        margin-top: 1rem;
+
+        h2 {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            text-align: center;
+        }
+
+        p {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+        h2, p {
+            margin: 0.4rem auto;
+        }
+
+    }
+
+
+
+
+    .strategy-button-container {
+        position: absolute;
+        left: 10px;
+        bottom: 10px; 
+        display: none; 
+
+    }
+
+    .strategy-table-container {
+        display: none;
+
+        // #strategy-table-img {
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        //     max-width: 90%;
+        //     max-height: 90%;
+
+
+
+        //     width: 100%;
+        //     height: 100%; 
+        //     top: 0;
+        //     left: 0;
+        //     right: 0;
+        //     bottom: 0;
+        //     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        //     z-index: 1; 
+        //     cursor: pointer; 
+        // }
+    
+    }
+
+
+
+
+}

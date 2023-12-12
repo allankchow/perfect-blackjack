@@ -1,0 +1,35 @@
+button {
+    color: white;
+    background-color: #007BFF; /* A pleasant blue, but you can choose any color */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    // transition-duration: 0.2s; /* Smooth transition for hover effect */
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+
+    /* Hover effect */
+    &:hover {
+        background-color: #0056b3; /* Darker shade when hovered */
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active/Clicked effect */
+    &:active {
+        background-color: #004494;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    &:disabled {
+        background-color: #cccccc; /* Light gray, or any color indicating it's disabled */
+        color: #666666; /* Darker text color for contrast, but muted */
+        cursor: not-allowed; /* Cursor to indicate the button is not clickable */
+        box-shadow: none; /* Removing the shadow can also indicate non-interactivity */
+    }
+}

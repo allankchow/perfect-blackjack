@@ -376,7 +376,7 @@ p {
 
 a,
 a:visited {
-  color: #111111;
+  color: #eeeeee;
   text-decoration: none;
 }
 
@@ -391,60 +391,186 @@ a:focus {
   outline: 1px dotted;
 }
 
-main {
-  /* strategy table */
+#main-menu-screen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
-main .score-container {
+#main-menu-screen-container .main-menu-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 30rem;
+}
+#main-menu-screen-container .main-menu-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#instructions-screen-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+#instructions-screen-container section {
+  display: flex;
+  flex-direction: column;
+  margin: 6rem 1rem;
+  max-width: 40rem;
+  align-items: center;
+}
+
+#strategy-screen-container {
+  display: none;
+}
+#strategy-screen-container .strategy-screen-content-container {
+  margin: 6rem 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+#strategy-screen-container .strategy-screen-content-container h2 {
+  text-align: center;
+}
+#strategy-screen-container .strategy-screen-content-container .strategy-table-container {
+  max-width: 36em;
+}
+
+#credits-screen-container {
+  display: none;
+  margin: 6rem 1rem;
+}
+#credits-screen-container h2 {
+  text-align: center;
+}
+#credits-screen-container table {
+  margin: 0 auto;
+}
+
+#main-game-screen-container {
+  display: none;
+  background-image: url(../images/backgrounds/bg-3.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  min-width: 43.75rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+#main-game-screen-container #game-score {
   position: absolute;
-  right: 1rem;
+  right: 10px;
+  top: 10px;
 }
-main .playing-cards-container {
+#main-game-screen-container #win-percentage {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+}
+#main-game-screen-container .playing-cards-container {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;
+  gap: 11rem;
 }
-main .playing-cards-container .dealer-cards-container .dealer-cards {
+#main-game-screen-container .playing-cards-container .dealer-cards-container {
+  margin-top: 3rem;
+}
+#main-game-screen-container .playing-cards-container .dealer-cards-container .dealer-cards {
   max-width: 6rem;
 }
-main .playing-cards-container .player-cards-container .player-cards {
-  max-width: 9rem;
+#main-game-screen-container .playing-cards-container .player-cards-container .player-cards {
+  max-width: 8rem;
+  margin-bottom: 1rem;
 }
-main .player-buttons-container {
+#main-game-screen-container .player-buttons-container {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
 }
-main .deal-button-container {
+#main-game-screen-container .deal-button-container {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
 }
-main .evaluation-text-container {
+#main-game-screen-container .evaluation-text-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
-main .evaluation-text-container h2 {
+#main-game-screen-container .evaluation-text-container h2 {
   grid-column: 2/3;
   grid-row: 1/2;
+  text-align: center;
 }
-main .evaluation-text-container p {
+#main-game-screen-container .evaluation-text-container p {
   grid-column: 2/3;
   grid-row: 2/3;
 }
-main .evaluation-text-container h2, main .evaluation-text-container p {
+#main-game-screen-container .evaluation-text-container h2, #main-game-screen-container .evaluation-text-container p {
   margin: 0.4rem auto;
 }
-main .strategy-button-container {
+#main-game-screen-container .strategy-button-container {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
   display: none;
 }
-main .strategy-table-container-hidden {
+#main-game-screen-container .strategy-table-container {
   display: none;
 }
-main .strategy-table-container-shown {
-  display: block;
+
+.music-container {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+#return-to-menu-button-container {
+  display: none;
+  position: absolute;
+  left: 10px;
+  top: 40px;
+}
+
+button {
+  color: white;
+  background-color: #007BFF; /* A pleasant blue, but you can choose any color */
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  /* Hover effect */
+  /* Active/Clicked effect */
+}
+button:hover {
+  background-color: #0056b3; /* Darker shade when hovered */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+button:active {
+  background-color: #004494;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+button:disabled {
+  background-color: #cccccc; /* Light gray, or any color indicating it's disabled */
+  color: #666666; /* Darker text color for contrast, but muted */
+  cursor: not-allowed; /* Cursor to indicate the button is not clickable */
+  box-shadow: none; /* Removing the shadow can also indicate non-interactivity */
 }
 
 /*# sourceMappingURL=styles.css.map */

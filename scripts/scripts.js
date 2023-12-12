@@ -3,7 +3,7 @@
 // Deck class
 // create, shuffle, combine decks
 class Deck {
-    constructor(numberOfDecks = 4) {
+    constructor(numberOfDecks) {
         this.numberOfDecks = numberOfDecks;
         this.cards = this._createMultipleDecks(); // array of card objects
         this.shuffle(); //shuffle at start
@@ -49,7 +49,7 @@ class Deck {
 // runs game functionalities
 class BlackjackGame {
     constructor() {
-        this.deck = new Deck();
+        this.deck = new Deck(8); // Deck(# of standard decks in a single deck)
         this.deck.shuffle(); 
         this.playerHand = [];
         this.dealerHand = [];
@@ -82,7 +82,7 @@ class BlackjackGame {
     // create new instance of deck and hand
     newRound() {
         // resets
-        this.deck = new Deck(); //create new deck each deal... can change later so ev counting is possible
+        this.deck = new Deck(8); // input # of decks... create new deck each deal... can change later so ev counting is possible
         this.deck.shuffle();
         this.playerHand = [];
         this.dealerHand = [];
@@ -214,6 +214,7 @@ class BlackjackGame {
         } else {
             gameHTMLElements.evalutionText.header.textContent = "Incorrect.";
             gameHTMLElements.evalutionText.detail.textContent = `The correct action was to ${recommendedAction}.`
+            gameHTMLElements.strategyTable.button.style.display = 'block';
         }
         
         console.log(`Recommended Action: ${recommendedAction}, Is Player Hand Soft?: ${isPlayerHandSoft}, Player Hand: ${playerHandValue}, Dealer Card: ${dealerHandValue}, Player Pair?: ${isPlayerHandPair}`);
@@ -309,7 +310,7 @@ class BlackjackGame {
 // The values are objects where each key is the dealer's up card (2 through A), and the value is the recommended action.
 const perfectStrategy = {
     // Hard totals
-    '8-': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'hit', '6': 'hit', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
+    '8': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'hit', '6': 'hit', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '9': {'2': 'hit', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '10': {'2': 'double down', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'double down', '8': 'double down', '9': 'double down', '10': 'hit', 'a': 'hit'},
     '11': {'2': 'double down', '3': 'double down', '4': 'double down', '5': 'double down', '6': 'double down', '7': 'double down', '8': 'double down', '9': 'double down', '10': 'double down', 'a': 'double down'},
@@ -318,7 +319,7 @@ const perfectStrategy = {
     '14': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
     '15': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'surrender', 'a': 'hit'},
     '16': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'hit', '8': 'hit', '9': 'surrender', '10': 'surrender', 'a': 'surrender'},
-    '17+': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'stand', '8': 'stand', '9': 'stand', '10': 'stand', 'a': 'stand'},
+    '17': {'2': 'stand', '3': 'stand', '4': 'stand', '5': 'stand', '6': 'stand', '7': 'stand', '8': 'stand', '9': 'stand', '10': 'stand', 'a': 'stand'},
 
     // Soft totals
     'a,2': {'2': 'hit', '3': 'hit', '4': 'hit', '5': 'double down', '6': 'double down', '7': 'hit', '8': 'hit', '9': 'hit', '10': 'hit', 'a': 'hit'},
@@ -343,6 +344,31 @@ const perfectStrategy = {
     'a,a': {'2': 'split', '3': 'split', '4': 'split', '5': 'split', '6': 'split', '7': 'split', '8': 'split', '9': 'split', '10': 'split', 'a': 'split'},
 
 };
+
+const gameScreenContainers = {
+    screen: {
+        mainMenu: document.getElementById('main-menu-screen-container'),
+        instructions: document.getElementById('instructions-screen-container'),
+        strategy: document.getElementById('strategy-screen-container'),
+        credits: document.getElementById('credits-screen-container'),
+        mainGame: document.getElementById('main-game-screen-container'),
+    },
+}
+
+const mainMenuHTMLElements = {
+    button: {
+        newGame: document.getElementById('new-game-button'),
+        instructions: document.getElementById('instructions-button'),
+        strategyGuide: document.getElementById('strategy-guide-button'),
+        credits: document.getElementById('credits-button'),
+    },
+}
+
+const strategyHTMLElements = {
+    button: {
+        returnToMenu: document.getElementById('to-menu-from-strategy-button'),
+    }
+}
 
 const gameHTMLElements = {
     stats: {
@@ -372,12 +398,14 @@ const gameHTMLElements = {
         detail: document.getElementById('evaluation-detail'),
     },
     strategyTable: {
-        strategyTableButton: document.getElementById('strategy-button-container'),
+        button: document.getElementById('strategy-button-container'),
+        table: document.getElementById('strategy-table-container'),
     },
 };
 
 let playerAction = "";
 let blackjackGame;
+const returnToMenu = document.getElementById('return-to-menu-button-container');
 
 
 // ------------------------------------------------------------------------------------------------------
@@ -387,6 +415,7 @@ let blackjackGame;
 // start game instance
 function gameStart() {
     blackjackGame = new BlackjackGame();
+    blackjackGame.updateUIDeal();
 }
 
 // background music function
@@ -410,9 +439,51 @@ function playBGMusic() {
 // temporary game starter condition
 document.addEventListener('DOMContentLoaded', () => {
     playBGMusic();
-    gameStart();
-    blackjackGame.updateUIDeal();
 });
+
+// main menu event listeners
+// ---------------------------
+
+// to new game screen
+mainMenuHTMLElements.button.newGame.addEventListener('click', () => {
+    gameStart();
+    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    gameScreenContainers.screen.mainGame.style.display = 'block';
+    returnToMenu.style.display = 'block';
+});
+
+//to instructions screen
+mainMenuHTMLElements.button.instructions.addEventListener('click', () => {
+    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    gameScreenContainers.screen.instructions.style.display = 'flex';
+    returnToMenu.style.display = 'block';
+});
+
+// to strategy guide screen
+mainMenuHTMLElements.button.strategyGuide.addEventListener('click', () => {
+    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    gameScreenContainers.screen.strategy.style.display = 'block';
+    returnToMenu.style.display = 'block';
+});
+
+// to credits screen
+mainMenuHTMLElements.button.credits.addEventListener('click', () => {
+    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    gameScreenContainers.screen.credits.style.display = 'block';
+    returnToMenu.style.display = 'block';
+
+});
+
+// return to menu button event listener
+strategyHTMLElements.button.returnToMenu.addEventListener('click', () => {
+    gameScreenContainers.screen.mainGame.style.display = 'none';
+    gameScreenContainers.screen.instructions.style.display = 'none';
+    gameScreenContainers.screen.strategy.style.display = 'none';
+    gameScreenContainers.screen.credits.style.display = 'none';
+    gameScreenContainers.screen.mainMenu.style.display = 'flex';
+    returnToMenu.style.display = 'none';
+});
+
 
 // event listeners for player buttons
 gameHTMLElements.button.hitButton.addEventListener('click', () => {
@@ -443,3 +514,21 @@ gameHTMLElements.button.surrenderButton.addEventListener('click', () => {
 gameHTMLElements.button.deal.addEventListener('click', () => {
     blackjackGame.newRound(); //bj checker in here
 });
+
+document.getElementById('strategy-button').addEventListener('click', function() {
+    document.getElementById('strategy-table-container').style.display = 'block';
+});
+
+gameHTMLElements.strategyTable.button.addEventListener('click', () => {
+    gameHTMLElements.strategyTable.table.style.display = 'block';
+});
+
+gameHTMLElements.strategyTable.table.addEventListener('click', () => {
+    gameHTMLElements.strategyTable.table.style.display = 'none';
+});
+
+document.getElementById('strategy-table-container').addEventListener('click', function() {
+    this.style.display = 'none';
+});
+
+
