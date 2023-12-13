@@ -97,6 +97,19 @@ class BlackjackGame {
         this.updateUIDeal();
     }
 
+    // Reset the game state
+    stopGame() {
+        this.playerHand = [];
+        this.dealerHand = [];
+        this.dealerHandHidden = [];
+        this.score = 0;
+        this.handsPlayed = 0;
+        gameHTMLElements.dealer.dealerCard1.src = "images/playing-cards/card-back-02.svg";
+        gameHTMLElements.dealer.dealerCard2.src = "images/playing-cards/card-back-02.svg";
+        gameHTMLElements.player.playerCard1.src = "images/playing-cards/card-back-02.svg";
+        gameHTMLElements.player.playerCard2.src = "images/playing-cards/card-back-02.svg";
+    }
+
     // counts player or dealer's hand value
     _countHandValue(hand) {
         let handValue = 0;
@@ -482,6 +495,7 @@ strategyHTMLElements.button.returnToMenu.addEventListener('click', () => {
     gameScreenContainers.screen.credits.style.display = 'none';
     gameScreenContainers.screen.mainMenu.style.display = 'flex';
     returnToMenu.style.display = 'none';
+    blackjackGame.stopGame();
 });
 
 
@@ -515,20 +529,12 @@ gameHTMLElements.button.deal.addEventListener('click', () => {
     blackjackGame.newRound(); //bj checker in here
 });
 
-document.getElementById('strategy-button').addEventListener('click', function() {
-    document.getElementById('strategy-table-container').style.display = 'block';
-});
-
 gameHTMLElements.strategyTable.button.addEventListener('click', () => {
     gameHTMLElements.strategyTable.table.style.display = 'block';
 });
 
 gameHTMLElements.strategyTable.table.addEventListener('click', () => {
     gameHTMLElements.strategyTable.table.style.display = 'none';
-});
-
-document.getElementById('strategy-table-container').addEventListener('click', function() {
-    this.style.display = 'none';
 });
 
 
