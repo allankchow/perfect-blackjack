@@ -92,10 +92,16 @@
 
         #strategy-table-img-02 {
             position: absolute;
-            top: 0rem;
+            top: 0;
+            left: 0;
             cursor: pointer;
             max-width: 28rem;
             height: auto;
+
+            &:hover {
+                max-width: 28.1rem;
+                
+            }
         }
     
     }

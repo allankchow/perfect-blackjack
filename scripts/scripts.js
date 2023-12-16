@@ -110,6 +110,12 @@ class BlackjackGame {
         gameHTMLElements.dealer.dealerCard2.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.player.playerCard1.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.player.playerCard2.src = "images/playing-cards/card-back-02.svg";
+        gameHTMLElements.strategyTable.button.style.display = 'none';
+        gameHTMLElements.strategyTable.table.style.display = 'none';
+        gameHTMLElements.evalutionText.header.textContent = "";
+        gameHTMLElements.evalutionText.detail.textContent = "";
+        gameHTMLElements.stats.gameScore.textContent = `Score: 0`;
+        gameHTMLElements.stats.winPercentage.textContent = `0%`;
     }
 
     // counts player or dealer's hand value
@@ -427,7 +433,7 @@ const actionSound = new Audio('../sounds/action-sound-02.mp3');
 actionSound.volume = 1;
 
 const dealSound = new Audio('../sounds/deal-04.mp3');
-dealSound.volume = 1;
+dealSound.volume = 0.3;
 
 // ------------------------------------------------------------------------------------------------------
 // Functions
@@ -442,8 +448,8 @@ function gameStart() {
 // background music function
 function playBGMusic() {
     const bgMusic = document.getElementById('backgroundMusic');
-    bgMusic.volume = 0.3; // Set initial volume
-    // bgMusic.play(); // Start playing music
+    bgMusic.volume = 0.05; // Set initial volume
+    bgMusic.play(); // Start playing music
 
     // Volume control
     document.getElementById('volumeControl').addEventListener('input', (event) => {
