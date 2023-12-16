@@ -90,7 +90,9 @@ class BlackjackGame {
         gameHTMLElements.evalutionText.header.textContent = "";
         gameHTMLElements.evalutionText.detail.textContent = "";
 
+
         // initial game actions
+        dealSound.play();
         this._dealInitialCards();
         this.enableButtons();
         this.checkForBJ();
@@ -207,6 +209,7 @@ class BlackjackGame {
     }
 
     evaluatePlayerDecision(playerAction) {
+        actionSound.play();
         let dealerHandValue = this._countHandValue(this.dealerHand);
         let playerHandValue = this._countHandValue(this.playerHand);
         const isPlayerHandSoft = this._isHandSoft(this.playerHand); 
@@ -412,7 +415,7 @@ const gameHTMLElements = {
     },
     strategyTable: {
         button: document.getElementById('strategy-button-container'),
-        table: document.getElementById('strategy-table-container'),
+        table: document.getElementById('strategy-table-container-02'),
     },
 };
 
@@ -420,6 +423,11 @@ let playerAction = "";
 let blackjackGame;
 const returnToMenu = document.getElementById('return-to-menu-button-container');
 
+const actionSound = new Audio('../sounds/action-sound-02.mp3');
+actionSound.volume = 1;
+
+const dealSound = new Audio('../sounds/deal-04.mp3');
+dealSound.volume = 1;
 
 // ------------------------------------------------------------------------------------------------------
 // Functions
@@ -435,7 +443,7 @@ function gameStart() {
 function playBGMusic() {
     const bgMusic = document.getElementById('backgroundMusic');
     bgMusic.volume = 0.3; // Set initial volume
-    bgMusic.play(); // Start playing music
+    // bgMusic.play(); // Start playing music
 
     // Volume control
     document.getElementById('volumeControl').addEventListener('input', (event) => {

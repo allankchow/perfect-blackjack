@@ -10,10 +10,10 @@
 @use 'typography';
 
 // Site Sections
-@use 'mainMenuScreen';
-@use 'instructionsScreen';
-@use 'strategyScreen';
-@use 'creditsScreen';
-@use 'mainGameScreen';
+@use 'screenMenu';
+@use 'screenInstructions';
+@use 'screenStrategy';
+@use 'screenCredits';
+@use 'screenGame';
 @use 'globalElements';
 @use 'buttons';

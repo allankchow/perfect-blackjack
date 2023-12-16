@@ -341,7 +341,7 @@ video {
 }
 
 body {
-  font-family: "DejaVu Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -355,7 +355,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playfair Display", Georgia, Times, "Times New Roman", serif;
+  font-family: "Jost", sans-serif;
   margin: 0.5em 0;
   font-size: 3rem;
 }
@@ -454,14 +454,6 @@ a:focus {
 
 #main-game-screen-container {
   display: none;
-  background-image: url(../images/backgrounds/bg-3.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
-  min-width: 43.75rem;
-  max-width: 42rem;
-  margin: 0 auto;
 }
 #main-game-screen-container #game-score {
   position: absolute;
@@ -478,13 +470,13 @@ a:focus {
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;
-  gap: 11rem;
-}
-#main-game-screen-container .playing-cards-container .dealer-cards-container {
-  margin-top: 3rem;
 }
 #main-game-screen-container .playing-cards-container .dealer-cards-container .dealer-cards {
   max-width: 6rem;
+}
+#main-game-screen-container .playing-cards-container .table-text-container {
+  max-width: 30rem;
+  margin-bottom: 2rem;
 }
 #main-game-screen-container .playing-cards-container .player-cards-container .player-cards {
   max-width: 8rem;
@@ -527,23 +519,45 @@ a:focus {
 #main-game-screen-container .strategy-table-container {
   display: none;
 }
+#main-game-screen-container .strategy-table-container #strategy-table-img-02 {
+  position: absolute;
+  top: 0rem;
+  cursor: pointer;
+  max-width: 28rem;
+  height: auto;
+}
 
 .music-container {
-  position: absolute;
+  position: relative;
   left: 10px;
   top: 10px;
 }
 
 #return-to-menu-button-container {
   display: none;
-  position: absolute;
+  position: relative;
   left: 10px;
-  top: 40px;
+  top: 20px;
+}
+
+main {
+  width: 50rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(../images/backgrounds/bg-6.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  margin: 0 auto;
 }
 
 button {
   color: white;
-  background-color: #007BFF; /* A pleasant blue, but you can choose any color */
+  background-color: #007BFF;
   border: none;
   padding: 10px 20px;
   text-align: center;
@@ -552,13 +566,13 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   /* Hover effect */
   /* Active/Clicked effect */
 }
 button:hover {
-  background-color: #0056b3; /* Darker shade when hovered */
+  background-color: #0056b3;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

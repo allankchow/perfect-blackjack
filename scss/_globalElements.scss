@@ -1,12 +1,28 @@
 .music-container {
-    position: absolute;
+    position: relative;
     left: 10px;
     top: 10px;
 }
 
 #return-to-menu-button-container {
     display: none;
-    position: absolute;
+    position: relative;
     left: 10px;
-    top: 40px;
+    top: 20px;
+}
+
+main {
+    width: 50rem;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+
+    background-image: url(../images/backgrounds/bg-6.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0 auto;
 }
