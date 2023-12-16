@@ -90,7 +90,9 @@ class BlackjackGame {
         gameHTMLElements.evalutionText.header.textContent = "";
         gameHTMLElements.evalutionText.detail.textContent = "";
 
+
         // initial game actions
+        dealSound.play();
         this._dealInitialCards();
         this.enableButtons();
         this.checkForBJ();
@@ -108,6 +110,12 @@ class BlackjackGame {
         gameHTMLElements.dealer.dealerCard2.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.player.playerCard1.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.player.playerCard2.src = "images/playing-cards/card-back-02.svg";
+        gameHTMLElements.strategyTable.button.style.display = 'none';
+        gameHTMLElements.strategyTable.table.style.display = 'none';
+        gameHTMLElements.evalutionText.header.textContent = "";
+        gameHTMLElements.evalutionText.detail.textContent = "";
+        gameHTMLElements.stats.gameScore.textContent = `Score: 0`;
+        gameHTMLElements.stats.winPercentage.textContent = `0%`;
     }
 
     // counts player or dealer's hand value
@@ -207,6 +215,7 @@ class BlackjackGame {
     }
 
     evaluatePlayerDecision(playerAction) {
+        actionSound.play();
         let dealerHandValue = this._countHandValue(this.dealerHand);
         let playerHandValue = this._countHandValue(this.playerHand);
         const isPlayerHandSoft = this._isHandSoft(this.playerHand); 
@@ -412,7 +421,7 @@ const gameHTMLElements = {
     },
     strategyTable: {
         button: document.getElementById('strategy-button-container'),
-        table: document.getElementById('strategy-table-container'),
+        table: document.getElementById('strategy-table-container-02'),
     },
 };
 
@@ -420,6 +429,11 @@ let playerAction = "";
 let blackjackGame;
 const returnToMenu = document.getElementById('return-to-menu-button-container');
 
+const actionSound = new Audio('../sounds/action-sound-02.mp3');
+actionSound.volume = 1;
+
+const dealSound = new Audio('../sounds/deal-04.mp3');
+dealSound.volume = 0.3;
 
 // ------------------------------------------------------------------------------------------------------
 // Functions
@@ -434,7 +448,7 @@ function gameStart() {
 // background music function
 function playBGMusic() {
     const bgMusic = document.getElementById('backgroundMusic');
-    bgMusic.volume = 0.3; // Set initial volume
+    bgMusic.volume = 0.05; // Set initial volume
     bgMusic.play(); // Start playing music
 
     // Volume control

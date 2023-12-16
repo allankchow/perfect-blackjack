@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfect Blackjack</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
     <!-- CSS stylesheets -->
     <link rel="stylesheet" href="styles/styles.css">
     
@@ -32,14 +37,14 @@
         <!-- music control container -->
         <div class="music-container">
             <audio id="backgroundMusic" loop>
-                <source src="sounds/bg-music-02.mp3" type="audio/mpeg">
+                <source src="sounds/bg-music-01.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             
             <!-- Volume Control Slider -->
-            <div>
-                <label for="volumeControl">Volume:</label>
-                <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
+            <div class="volume-slider-container">
+                <label for="volumeControl">Music:</label>
+                <input type="range" id="volumeControl" min="0" max="0.2" step="0.01" value="0.05">
             </div>
         </div>
 
@@ -110,8 +115,8 @@
                 </section>
                 <section>
                     <h2>Perfect Strategy Table</h2>
-                    <div class="strategy-table-container strategy-table-container-hidden" id="strategy-table-container">
-                        <img id="strategy-table-img" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
+                    <div class="strategy-table-container" id="strategy-table-container-01">
+                        <img id="strategy-table-img-01" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
                     </div>
                 </section>
             </div>
@@ -153,6 +158,11 @@
                     <img class="cards dealer-cards" id="dealer-card-2" src="images/playing-cards/card-back-02.svg" alt="dealer's second card">  
                 </div>
 
+                <!-- table text -->
+                <div class="table-text-container">
+                    <img src="images/backgrounds/table-text.png" alt="dealer stand on 17, blackjack pays 3:2">
+                </div>
+
                 <!-- player cards -->
                 <!-- <h2>Player Cards</h2> -->
                 <div class="player-cards-container">
@@ -183,8 +193,8 @@
             <div class="strategy-button-container" id="strategy-button-container">
                 <button type="button" id="strategy-button-02">Show Strategy Table</button>
             </div>
-            <div class="strategy-table-container" id="strategy-table-container">
-                <img id="strategy-table-img" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
+            <div class="strategy-table-container" id="strategy-table-container-02">
+                <img id="strategy-table-img-02" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
             </div>
         </div>
     </main>

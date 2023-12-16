@@ -2,14 +2,7 @@
 
 #main-game-screen-container {
     display: none;
-    background-image: url(../images/backgrounds/bg-3.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    min-width: 43.75rem;
-    max-width: 42rem;
-    margin: 0 auto;
+
 
     #game-score {
         position: absolute;
@@ -28,14 +21,18 @@
         grid-template-columns:auto;
         justify-content: center;
         justify-items: center;
-        gap: 11rem;
+        // gap: 11rem;
 
 
         .dealer-cards-container{
-            margin-top: 3rem;
             .dealer-cards {
                 max-width: 6rem;
                 }
+        }
+
+        .table-text-container {
+            max-width: 30rem;
+            margin-bottom: 2rem;
         }
 
         .player-cards-container {
@@ -82,8 +79,6 @@
     }
 
 
-
-
     .strategy-button-container {
         position: absolute;
         left: 10px;
@@ -95,26 +90,19 @@
     .strategy-table-container {
         display: none;
 
-        // #strategy-table-img {
-        //     position: absolute;
-        //     top: 50%;
-        //     left: 50%;
-        //     transform: translate(-50%, -50%);
-        //     max-width: 90%;
-        //     max-height: 90%;
+        #strategy-table-img-02 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            max-width: 28rem;
+            height: auto;
 
-
-
-        //     width: 100%;
-        //     height: 100%; 
-        //     top: 0;
-        //     left: 0;
-        //     right: 0;
-        //     bottom: 0;
-        //     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-        //     z-index: 1; 
-        //     cursor: pointer; 
-        // }
+            &:hover {
+                max-width: 28.1rem;
+                
+            }
+        }
     
     }
 

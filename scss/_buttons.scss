@@ -1,6 +1,6 @@
 button {
     color: white;
-    background-color: #007BFF; /* A pleasant blue, but you can choose any color */
+    background-color: #007BFF; 
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -8,14 +8,13 @@ button {
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    // transition-duration: 0.2s; /* Smooth transition for hover effect */
     cursor: pointer;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 
     /* Hover effect */
     &:hover {
-        background-color: #0056b3; /* Darker shade when hovered */
+        background-color: #0056b3; 
         color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
