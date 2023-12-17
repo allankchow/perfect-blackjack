@@ -3,7 +3,6 @@
 #main-game-screen-container {
     display: none;
 
-
     #game-score {
         position: absolute;
         right: 10px;
@@ -21,8 +20,6 @@
         grid-template-columns:auto;
         justify-content: center;
         justify-items: center;
-        // gap: 11rem;
-
 
         .dealer-cards-container{
             .dealer-cards {
@@ -32,7 +29,7 @@
 
         .table-text-container {
             max-width: 30rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .player-cards-container {
@@ -82,8 +79,8 @@
     .strategy-button-container {
         position: absolute;
         left: 10px;
-        bottom: 10px; 
-        display: none; 
+        bottom: 15px; 
+        display: none;  
 
     }
 
@@ -99,7 +96,7 @@
             height: auto;
 
             &:hover {
-                max-width: 28.1rem;
+                max-width: 27.9rem;
                 
             }
         }

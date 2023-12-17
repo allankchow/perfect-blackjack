@@ -1,6 +1,6 @@
 #credits-screen-container {
     display: none;
-    margin: 6rem 1rem;
+    margin: 3rem 1rem;
 
     h2 {
         text-align: center;
@@ -8,5 +8,15 @@
 
     table {
         margin: 0 auto;
+        border: 1px solid white;
+        td {
+            padding: 0.2rem 1rem;
+
+            a:hover {
+                text-decoration: line-through;
+            }
+        }
     }
+
+
 }

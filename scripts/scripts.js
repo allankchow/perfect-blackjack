@@ -429,11 +429,16 @@ let playerAction = "";
 let blackjackGame;
 const returnToMenu = document.getElementById('return-to-menu-button-container');
 
+// sound elements
+const unmute = document.getElementById('unmute-music-button');
+const volumeControl = document.getElementById('volume-control')
+
 const actionSound = new Audio('../sounds/action-sound-02.mp3');
 actionSound.volume = 1;
 
 const dealSound = new Audio('../sounds/deal-04.mp3');
 dealSound.volume = 0.3;
+
 
 // ------------------------------------------------------------------------------------------------------
 // Functions
@@ -447,12 +452,12 @@ function gameStart() {
 
 // background music function
 function playBGMusic() {
-    const bgMusic = document.getElementById('backgroundMusic');
-    bgMusic.volume = 0.05; // Set initial volume
-    bgMusic.play(); // Start playing music
+    const bgMusic = document.getElementById('background-music');
+    bgMusic.volume = 0.05;
+    bgMusic.play(); 
 
     // Volume control
-    document.getElementById('volumeControl').addEventListener('input', (event) => {
+    volumeControl.addEventListener('input', (event) => {
         bgMusic.volume = event.target.value;
     });
 }
@@ -463,8 +468,14 @@ function playBGMusic() {
 // Event Listener function
 // ------------------------------------------------------------------------------------------------------
 
-// temporary game starter condition
-document.addEventListener('DOMContentLoaded', () => {
+// // temporary game starter condition
+// document.addEventListener('DOMContentLoaded', () => {
+//     playBGMusic();
+// });
+// unmute event listener
+unmute.addEventListener('click', () => {
+    unmute.style.display = 'none';
+    volumeControl.style.display = 'block';
     playBGMusic();
 });
 

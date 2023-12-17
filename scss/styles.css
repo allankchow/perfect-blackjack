@@ -341,7 +341,7 @@ video {
 }
 
 body {
-  font-family: "Outfit", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -355,11 +355,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Outfit", sans-serif;
+  font-family: "Jost", sans-serif;
   margin: 0.5em 0;
-  font-size: 2.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-size: 3rem;
 }
 
 h2 {
@@ -400,6 +398,7 @@ a:focus {
   align-items: center;
   height: 80vh;
 }
+
 #main-menu-screen-container .main-menu-text-container {
   display: flex;
   flex-direction: column;
@@ -407,6 +406,7 @@ a:focus {
   text-align: center;
   max-width: 30rem;
 }
+
 #main-menu-screen-container .main-menu-buttons-container {
   display: flex;
   flex-direction: column;
@@ -418,10 +418,11 @@ a:focus {
   flex-direction: column;
   align-items: center;
 }
+
 #instructions-screen-container section {
   display: flex;
   flex-direction: column;
-  margin: 3rem 1rem;
+  margin: 6rem 1rem;
   max-width: 40rem;
   align-items: center;
 }
@@ -429,105 +430,118 @@ a:focus {
 #strategy-screen-container {
   display: none;
 }
+
 #strategy-screen-container .strategy-screen-content-container {
-  margin: 3rem 1rem;
+  margin: 6rem 1rem;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
 #strategy-screen-container .strategy-screen-content-container h2 {
   text-align: center;
 }
+
 #strategy-screen-container .strategy-screen-content-container .strategy-table-container {
   max-width: 32em;
 }
 
 #credits-screen-container {
   display: none;
-  margin: 3rem 1rem;
+  margin: 6rem 1rem;
 }
+
 #credits-screen-container h2 {
   text-align: center;
 }
+
 #credits-screen-container table {
   margin: 0 auto;
-  border: 1px solid white;
-}
-#credits-screen-container table td {
-  padding: 0.2rem 1rem;
-}
-#credits-screen-container table td a:hover {
-  text-decoration: line-through;
 }
 
 #main-game-screen-container {
   display: none;
 }
+
 #main-game-screen-container #game-score {
   position: absolute;
   right: 10px;
   top: 10px;
 }
+
 #main-game-screen-container #win-percentage {
   position: absolute;
   right: 10px;
   top: 40px;
 }
+
 #main-game-screen-container .playing-cards-container {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;
 }
+
 #main-game-screen-container .playing-cards-container .dealer-cards-container .dealer-cards {
   max-width: 6rem;
 }
+
 #main-game-screen-container .playing-cards-container .table-text-container {
   max-width: 30rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
+
 #main-game-screen-container .playing-cards-container .player-cards-container .player-cards {
   max-width: 8rem;
   margin-bottom: 1rem;
 }
+
 #main-game-screen-container .player-buttons-container {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
 }
+
 #main-game-screen-container .deal-button-container {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
 }
+
 #main-game-screen-container .evaluation-text-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   margin-top: 1rem;
 }
+
 #main-game-screen-container .evaluation-text-container h2 {
   grid-column: 2/3;
   grid-row: 1/2;
   text-align: center;
 }
+
 #main-game-screen-container .evaluation-text-container p {
   grid-column: 2/3;
   grid-row: 2/3;
 }
+
 #main-game-screen-container .evaluation-text-container h2, #main-game-screen-container .evaluation-text-container p {
   margin: 0.4rem auto;
 }
+
 #main-game-screen-container .strategy-button-container {
-  position: absolute;
+  position: relative;
   left: 10px;
-  bottom: 15px;
+  bottom: 10px;
   display: none;
 }
+
 #main-game-screen-container .strategy-table-container {
   display: none;
 }
+
 #main-game-screen-container .strategy-table-container #strategy-table-img-02 {
   position: absolute;
   top: 0;
@@ -536,8 +550,9 @@ a:focus {
   max-width: 28rem;
   height: auto;
 }
+
 #main-game-screen-container .strategy-table-container #strategy-table-img-02:hover {
-  max-width: 27.9rem;
+  max-width: 28.1rem;
 }
 
 .music-container {
@@ -546,17 +561,13 @@ a:focus {
   top: 10px;
   display: flex;
 }
+
 .music-container .volume-slider-container {
   display: flex;
 }
+
 .music-container .volume-slider-container input {
-  display: none;
   margin-left: 0.5rem;
-}
-.music-container .volume-slider-container .material-symbols-outlined {
-  cursor: pointer;
-  margin-left: 0.5rem;
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 #return-to-menu-button-container {
@@ -567,7 +578,7 @@ a:focus {
 }
 
 main {
-  width: 43rem;
+  width: 45rem;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -596,20 +607,25 @@ button {
   /* Hover effect */
   /* Active/Clicked effect */
 }
+
 button:hover {
   background-color: #0056b3;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 button:active {
   background-color: #004494;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 button:disabled {
   background-color: #cccccc; /* Light gray, or any color indicating it's disabled */
   color: #666666; /* Darker text color for contrast, but muted */
   cursor: not-allowed; /* Cursor to indicate the button is not clickable */
   box-shadow: none; /* Removing the shadow can also indicate non-interactivity */
 }
+
+
 
 /*# sourceMappingURL=styles.css.map */

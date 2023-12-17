@@ -10,6 +10,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <!-- CSS stylesheets -->
     <link rel="stylesheet" href="styles/styles.css">
     
@@ -36,7 +51,7 @@
     <main>
         <!-- music control container -->
         <div class="music-container">
-            <audio id="backgroundMusic" loop>
+            <audio id="background-music" loop>
                 <source src="sounds/bg-music-01.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -44,7 +59,8 @@
             <!-- Volume Control Slider -->
             <div class="volume-slider-container">
                 <label for="volumeControl">Music:</label>
-                <input type="range" id="volumeControl" min="0" max="0.2" step="0.01" value="0.05">
+                <input type="range" id="volume-control" min="0" max="0.2" step="0.01" value="0.05">
+                <span id="unmute-music-button" class="material-symbols-outlined">music_off</span>
             </div>
         </div>
 
@@ -57,7 +73,6 @@
         <div id="main-menu-screen-container">
             <div class="main-menu-text-container">
                 <h1>Welcome to Perfect Blackjack!</h1>
-                <p>Where gamblers learn to stop gambling and start winning 💰💰💰</p>
             </div>
 
             <div class="main-menu-buttons-container">
@@ -116,7 +131,7 @@
                 <section>
                     <h2>Perfect Strategy Table</h2>
                     <div class="strategy-table-container" id="strategy-table-container-01">
-                        <img id="strategy-table-img-01" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
+                        <img id="strategy-table-img-02" src="images/pop-up/strategy-table-01.png" alt="Perfect strategy table">
                     </div>
                 </section>
             </div>
@@ -133,7 +148,15 @@
              </tr>
              <tr>
                 <td>Background Music</td>
-                <td><a href="https://pixabay.com/users/healthydesires-29028663/">Water Focused</a></td>
+                <td><a href="https://pixabay.com/music/smooth-jazz-seduction-jazz-112149/">FreeGroove</a></td>
+             </tr>
+             <tr>
+                <td>Deal Sound</td>
+                <td><a href="https://www.youtube.com/watch?v=1jDlRDV3__M">n Beats</a></td>
+             </tr>
+             <tr>
+                <td>Player Action Sound</td>
+                <td><a href="https://www.youtube.com/watch?v=jXnrMSOJyrE">MedievalGoose</a></td>
              </tr>
             </table>
         </div>
