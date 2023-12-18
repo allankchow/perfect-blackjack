@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1000" height="1000"><rect width="1000" height="1000" rx="200" ry="200" fill="#ffffff"></rect><g transform="matrix(1.953125,0,0,1.953125,9.53125,14.23968255519867)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #111;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <polygon class="cls-1" points="196.49 142.13 76 350.82 316.98 350.82 196.49 142.13"></polygon>
+  </g>
+  <g id="Layer_5" data-name="Layer 5">
+    <path class="cls-1" d="m300.06,241.06c0,64.03,51.91,115.94,115.94,115.94V125.12c-64.03,0-115.94,51.91-115.94,115.94Z"></path>
+  </g>
+</svg></svg></g></svg>
