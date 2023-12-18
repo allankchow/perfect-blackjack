@@ -466,8 +466,8 @@ function gameStart() {
 
 // background music function
 function playBGMusic() {
-    bgMusic.volume = 0.05;
-    volumeControl.value = 0.05; //slider position
+    bgMusic.volume = 0.2;
+    volumeControl.value = 0.2; //slider position
     bgMusic.play(); 
 
     // Volume control
