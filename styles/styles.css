@@ -404,8 +404,8 @@ a:focus {
   align-items: center;
   height: 80vh;
   background-image: url(../images/backgrounds/menu-decal-left.png), url(../images/backgrounds/menu-decal-right.png);
-  background-position: left 2rem bottom -2rem, right 2rem bottom;
-  background-size: 14rem, 12rem;
+  background-position: left 2rem bottom 1rem, right 2rem bottom 3rem;
+  background-size: 13rem, 11rem;
   background-repeat: no-repeat, no-repeat;
   z-index: 2;
 }
