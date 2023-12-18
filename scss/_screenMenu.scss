@@ -5,12 +5,19 @@
     align-items: center;
     height: 80vh;
 
+    background-image: url(../images/backgrounds/menu-decal-left.png), url(../images/backgrounds/menu-decal-right.png);
+    background-position: left 2rem bottom -2rem, right 2rem bottom;
+    background-size: 14rem, 12rem;
+    background-repeat: no-repeat, no-repeat;
+    z-index: 2;
+
     .main-menu-text-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         max-width: 30rem;
+        margin-bottom: 2rem;
     }
 
     .main-menu-buttons-container {

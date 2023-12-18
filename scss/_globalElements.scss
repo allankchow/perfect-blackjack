@@ -13,14 +13,17 @@
         }
 
         .material-symbols-outlined {
+            transition: color 0.3s ease;
             cursor: pointer;
             margin-left: 0.5rem;
-
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        .material-symbols-outlined:hover {
+        color: #666666;
         }
     }
 }
@@ -40,7 +43,7 @@ main {
     left:0;
     right:0;
 
-    background-image: url(../images/backgrounds/bg-7.png);
+    background-image: url(../images/backgrounds/bg-1.png);
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: auto 100%;

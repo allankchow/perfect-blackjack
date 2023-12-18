@@ -9,6 +9,10 @@
     opacity: 1;
   }
 }
+.card-animation {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -399,6 +403,11 @@ a:focus {
   justify-content: center;
   align-items: center;
   height: 80vh;
+  background-image: url(../images/backgrounds/menu-decal-left.png), url(../images/backgrounds/menu-decal-right.png);
+  background-position: left 2rem bottom -2rem, right 2rem bottom;
+  background-size: 14rem, 12rem;
+  background-repeat: no-repeat, no-repeat;
+  z-index: 2;
 }
 #main-menu-screen-container .main-menu-text-container {
   display: flex;
@@ -406,6 +415,7 @@ a:focus {
   align-items: center;
   text-align: center;
   max-width: 30rem;
+  margin-bottom: 2rem;
 }
 #main-menu-screen-container .main-menu-buttons-container {
   display: flex;
@@ -503,9 +513,9 @@ a:focus {
 }
 #main-game-screen-container .evaluation-text-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 #main-game-screen-container .evaluation-text-container h2 {
   grid-column: 2/3;
@@ -554,9 +564,13 @@ a:focus {
   margin-left: 0.5rem;
 }
 .music-container .volume-slider-container .material-symbols-outlined {
+  transition: color 0.3s ease;
   cursor: pointer;
   margin-left: 0.5rem;
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+.music-container .volume-slider-container .material-symbols-outlined:hover {
+  color: #666666;
 }
 
 #return-to-menu-button-container {
@@ -573,7 +587,7 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url(../images/backgrounds/bg-7.png);
+  background-image: url(../images/backgrounds/bg-1.png);
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: auto 100%;
@@ -581,35 +595,33 @@ main {
 }
 
 button {
-  color: white;
-  background-color: #007BFF;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000;
+  background: linear-gradient(to bottom, #f8ce6b, #a67c00);
   border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  /* Hover effect */
-  /* Active/Clicked effect */
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 button:hover {
-  background-color: #0056b3;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #d1ae5b, #806000);
 }
 button:active {
-  background-color: #004494;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #ad904c, #5e4600);
 }
 button:disabled {
-  background-color: #cccccc; /* Light gray, or any color indicating it's disabled */
-  color: #666666; /* Darker text color for contrast, but muted */
-  cursor: not-allowed; /* Cursor to indicate the button is not clickable */
-  box-shadow: none; /* Removing the shadow can also indicate non-interactivity */
+  background: linear-gradient(to bottom, #a1a1a1, #6e6e6e);
+  color: #616161;
+  cursor: not-allowed;
+  box-shadow: none;
+  text-shadow: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

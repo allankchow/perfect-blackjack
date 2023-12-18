@@ -69,7 +69,6 @@ class BlackjackGame {
         }
     }
 
-
     // deal 2 revealed cards to player and 1 to dealer
     _dealInitialCards() {
         this._dealCard(this.playerHand);
@@ -101,11 +100,14 @@ class BlackjackGame {
 
     // Reset the game state
     stopGame() {
+        // reset current game stats
         this.playerHand = [];
         this.dealerHand = [];
         this.dealerHandHidden = [];
         this.score = 0;
         this.handsPlayed = 0;
+
+        // reset gameHTMLElements
         gameHTMLElements.dealer.dealerCard1.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.dealer.dealerCard2.src = "images/playing-cards/card-back-02.svg";
         gameHTMLElements.player.playerCard1.src = "images/playing-cards/card-back-02.svg";
@@ -231,10 +233,10 @@ class BlackjackGame {
         const isActionCorrect = playerAction === recommendedAction;
         this._updateGameScore(isActionCorrect);
         if (isActionCorrect) {
-            gameHTMLElements.evalutionText.header.textContent = "Correct!";
+            gameHTMLElements.evalutionText.header.textContent = "Correct! ✅";
             gameHTMLElements.evalutionText.detail.textContent = `You always want to ${recommendedAction} in this situation`
         } else {
-            gameHTMLElements.evalutionText.header.textContent = "Incorrect.";
+            gameHTMLElements.evalutionText.header.textContent = "Incorrect. ❌";
             gameHTMLElements.evalutionText.detail.textContent = `The correct action was to ${recommendedAction}.`
             gameHTMLElements.strategyTable.button.style.display = 'block';
         }
@@ -320,6 +322,14 @@ class BlackjackGame {
         gameHTMLElements.player.handValue.innerHTML = `Player Hand: ${this._countHandValue(this.playerHand)}`;
         gameHTMLElements.dealer.handValue.innerHTML = `Dealer Hand: ${this._countHandValue(this.dealerHand)}`;
     }
+
+    //animate initial cards
+    animateDeal() {
+        gameHTMLElements.dealer.dealerCard1.classList.add('card-animation');
+        gameHTMLElements.dealer.dealerCard2.classList.add('card-animation');
+        gameHTMLElements.player.playerCard1.classList.add('card-animation');
+        gameHTMLElements.player.playerCard2.classList.add('card-animation');
+    }
 }
 
 
@@ -386,12 +396,6 @@ const mainMenuHTMLElements = {
     },
 }
 
-const strategyHTMLElements = {
-    button: {
-        returnToMenu: document.getElementById('to-menu-from-strategy-button'),
-    }
-}
-
 const gameHTMLElements = {
     stats: {
         gameScore: document.getElementById('game-score'),
@@ -427,16 +431,23 @@ const gameHTMLElements = {
 
 let playerAction = "";
 let blackjackGame;
-const returnToMenu = document.getElementById('return-to-menu-button-container');
+
+const returnToMenuButton = document.getElementById('return-to-menu-button-container');
+
 
 // sound elements
+// ---------------------------
 const unmute = document.getElementById('unmute-music-button');
-const volumeControl = document.getElementById('volume-control')
+const volumeControl = document.getElementById('volume-control');
+const bgMusic = document.getElementById('background-music');
 
-const actionSound = new Audio('../sounds/action-sound-02.mp3');
+const initialDealSound = new Audio('sounds/deal-02.mp3');
+initialDealSound.volume = 1;
+
+const actionSound = new Audio('sounds/action-sound-03.mp3');
 actionSound.volume = 1;
 
-const dealSound = new Audio('../sounds/deal-04.mp3');
+const dealSound = new Audio('sounds/deal-04.mp3');
 dealSound.volume = 0.3;
 
 
@@ -448,18 +459,41 @@ dealSound.volume = 0.3;
 function gameStart() {
     blackjackGame = new BlackjackGame();
     blackjackGame.updateUIDeal();
+    initialDealSound.play();
+    blackjackGame.animateDeal();
+    
 }
 
 // background music function
 function playBGMusic() {
-    const bgMusic = document.getElementById('background-music');
     bgMusic.volume = 0.05;
+    volumeControl.value = 0.05; //slider position
     bgMusic.play(); 
 
     // Volume control
     volumeControl.addEventListener('input', (event) => {
         bgMusic.volume = event.target.value;
+
+        if (bgMusic.volume === 0) {
+            volumeControl.style.display = 'none';
+            unmute.style.display = 'block';
+        }
     });
+}
+
+function leaveMenu() {
+    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    returnToMenuButton.style.display = 'block';
+}
+
+function returnToMenu() {
+    gameScreenContainers.screen.mainGame.style.display = 'none';
+    gameScreenContainers.screen.instructions.style.display = 'none';
+    gameScreenContainers.screen.strategy.style.display = 'none';
+    gameScreenContainers.screen.credits.style.display = 'none';
+    gameScreenContainers.screen.mainMenu.style.display = 'flex';
+    returnToMenuButton.style.display = 'none';
+    blackjackGame.stopGame();
 }
 
 
@@ -468,10 +502,6 @@ function playBGMusic() {
 // Event Listener function
 // ------------------------------------------------------------------------------------------------------
 
-// // temporary game starter condition
-// document.addEventListener('DOMContentLoaded', () => {
-//     playBGMusic();
-// });
 // unmute event listener
 unmute.addEventListener('click', () => {
     unmute.style.display = 'none';
@@ -479,52 +509,49 @@ unmute.addEventListener('click', () => {
     playBGMusic();
 });
 
+// prevent zoom/zoom-out
+document.addEventListener('wheel', function(event) {
+    if (event.ctrlKey === true) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+
 // main menu event listeners
 // ---------------------------
 
 // to new game screen
 mainMenuHTMLElements.button.newGame.addEventListener('click', () => {
     gameStart();
-    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    leaveMenu();
     gameScreenContainers.screen.mainGame.style.display = 'block';
-    returnToMenu.style.display = 'block';
 });
 
 //to instructions screen
 mainMenuHTMLElements.button.instructions.addEventListener('click', () => {
-    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    leaveMenu();
     gameScreenContainers.screen.instructions.style.display = 'flex';
-    returnToMenu.style.display = 'block';
 });
 
 // to strategy guide screen
 mainMenuHTMLElements.button.strategyGuide.addEventListener('click', () => {
-    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    leaveMenu();
     gameScreenContainers.screen.strategy.style.display = 'block';
-    returnToMenu.style.display = 'block';
 });
 
 // to credits screen
 mainMenuHTMLElements.button.credits.addEventListener('click', () => {
-    gameScreenContainers.screen.mainMenu.style.display = 'none';
+    leaveMenu();
     gameScreenContainers.screen.credits.style.display = 'block';
-    returnToMenu.style.display = 'block';
-
 });
 
 // return to menu button event listener
-strategyHTMLElements.button.returnToMenu.addEventListener('click', () => {
-    gameScreenContainers.screen.mainGame.style.display = 'none';
-    gameScreenContainers.screen.instructions.style.display = 'none';
-    gameScreenContainers.screen.strategy.style.display = 'none';
-    gameScreenContainers.screen.credits.style.display = 'none';
-    gameScreenContainers.screen.mainMenu.style.display = 'flex';
-    returnToMenu.style.display = 'none';
-    blackjackGame.stopGame();
+returnToMenuButton.addEventListener('click', () => {
+    returnToMenu();
 });
 
 
 // event listeners for player buttons
+// ------------------------------------------------
 gameHTMLElements.button.hitButton.addEventListener('click', () => {
     playerAction = "hit";
     blackjackGame.disableButtons();
@@ -550,14 +577,16 @@ gameHTMLElements.button.surrenderButton.addEventListener('click', () => {
     blackjackGame.disableButtons();
     blackjackGame.evaluatePlayerDecision(playerAction);
 });
+
+// deal button event listener
 gameHTMLElements.button.deal.addEventListener('click', () => {
     blackjackGame.newRound(); //bj checker in here
 });
 
+//strategy table event listener
 gameHTMLElements.strategyTable.button.addEventListener('click', () => {
     gameHTMLElements.strategyTable.table.style.display = 'block';
 });
-
 gameHTMLElements.strategyTable.table.addEventListener('click', () => {
     gameHTMLElements.strategyTable.table.style.display = 'none';
 });
