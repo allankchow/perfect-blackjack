@@ -278,6 +278,7 @@ class BlackjackGame {
         
         if (playerHandValue === 21 && (dealerHandValue + dealerHandHiddenValue) === 21) { //check if both dealer and player has blackjack -->push
             console.log("Push");
+            this.dealerHand[1] = this.dealerHandHidden[0];                  // add the hidden card to the second official dealer card before the ui update method
             gameHTMLElements.evalutionText.header.textContent = "Push";
             this.disableButtons();
             gameHTMLElements.button.deal.disabled = false;
