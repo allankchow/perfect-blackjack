@@ -12,5 +12,6 @@ Assuming the Blackjack payout is 3:2, with these rules and perfect basic strateg
 To further enhance your edge, look into Expected Value (EV) counting. EV counting, a nuanced form of card counting, helps in making more informed decisions by quantifying the profitability of playing hands based on the composition of the remaining cards in the deck(s). Adjusting bets and strategies according to the EV (positive for favorable cards, negative for unfavorable ones) can potentially tilt the odds in the player's favor, further reducing the house edge when applied with skill.
 
 
-Professor Feedback:
+# Professor Feedback:
+
 ![perfect-blackjack-feedback](https://github.com/user-attachments/assets/d65b13c5-ebc9-44a3-a978-90026ba740e3)
